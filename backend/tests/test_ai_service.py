@@ -139,17 +139,26 @@ def main() -> int:
            f"db: {sorted(db_specializations)}")
 
     # --- Fallback behaviour (provider unavailable) ---
+    # The fallback is the deterministic keyword analyzer: per-problem and
+    # relevant — NOT one canned specialty for every request (that would
+    # silently collapse matching to a single doctor list).
     failing = MediqoAIService(StubProvider(error=AIProviderError("provider down")))
     result = failing.analyze_medical_problem("I have severe tooth pain.")
     expect(
-        result.specialization == "General Physician"
+        result.specialization == "Dentist"
         and result.urgency == "normal"
         and result.source == "fallback",
-        "Provider failure -> safe fallback (honest source marker)",
+        "Provider failure -> deterministic keyword fallback (honest source marker)",
         f"got {result.specialization}/{result.urgency}/source={result.source}",
     )
-    expect(result.summary.startswith("We could not fully analyze"),
-           "Fallback summary is honest about incomplete analysis")
+    rash_result = failing.analyze_medical_problem("My skin has a rash.")
+    expect(
+        rash_result.specialization == "Dermatologist" and rash_result.source == "fallback",
+        "Keyword fallback is problem-specific (rash -> Dermatologist)",
+        f"got {rash_result.specialization}/source={rash_result.source}",
+    )
+    expect(rash_result.specialization != result.specialization,
+           "Fallback specialty differs per problem (no canned response)")
 
     # Emergency still wins even when the provider is down
     result = failing.analyze_medical_problem("I can't breathe properly.")

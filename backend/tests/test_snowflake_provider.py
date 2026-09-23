@@ -194,14 +194,14 @@ def main() -> int:
                 expect(TEST_PAT not in str(exc) and "invalid token" not in str(exc),
                        "Provider error message exposes no PAT / upstream body")
 
-        # ...and through the facade: safe fallback, honest source marker
+        # ...and through the facade: deterministic keyword fallback, honest marker
         service = MediqoAIService(provider)
         with mock.patch("app.services.ai_service.httpx.post") as post:
             post.return_value = FakeResponse(401, '{"message": "invalid token"}')
             result = service.analyze_medical_problem("I have stomach pain.")
-        expect(result.specialization == "General Physician" and result.urgency == "normal"
+        expect(result.specialization == "Gastroenterologist" and result.urgency == "normal"
                and result.source == "fallback",
-               "Cortex failure -> safe fallback via the existing facade",
+               "Cortex failure -> problem-specific keyword fallback via the facade",
                f"got {result.specialization}/{result.urgency}/{result.source}")
 
     # --- 6. Timeout -> controlled failure, no crash ---
@@ -257,14 +257,14 @@ def main() -> int:
                    "Cortex-analyzed specialty reaches the API response",
                    f"got {body.get('specialization')}")
 
-            # Network failure at the API layer -> 200 + fallback content
+            # Network failure at the API layer -> 200 + keyword-fallback content
             with mock.patch("app.services.ai_service.httpx.post",
                             side_effect=httpx.ConnectError("refused")):
                 data = client.post("/analyze-problem",
                                    json={"problem": "My skin has a rash."}).json()
-            expect(data["specialization"] == "General Physician"
+            expect(data["specialization"] == "Dermatologist"
                    and data["urgency"] == "normal",
-                   "Cortex outage -> controlled fallback response, no 500")
+                   "Cortex outage -> relevant keyword-fallback response, no 500")
         finally:
             app.dependency_overrides.pop(get_ai_service, None)
 

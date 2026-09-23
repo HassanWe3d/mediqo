@@ -372,8 +372,8 @@ def main() -> int:
         expect(response.status_code == 200, "CASE 13: AI failure -> HTTP 200 (no crash)")
         body = response.json()
         expect(body["status"] == "success"
-               and body["analysis"]["specialization"] == "General Physician",
-               "CASE 13: fallback analysis used (General Physician)")
+               and body["analysis"]["specialization"] == "Dermatologist",
+               "CASE 13: deterministic keyword fallback used (per-problem specialty)")
         expect("AIProviderError" not in response.text
                and "Traceback" not in response.text
                and "simulated outage" not in response.text,

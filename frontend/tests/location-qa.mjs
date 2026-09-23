@@ -404,10 +404,10 @@ await sleep(800);
   await sleep(700);
   await clickButton(page3, "Enter location manually");
   await page3.waitForFunction(() => document.body.textContent.includes("Enter your city"), { timeout: 4000 });
-  await typeInto(page3, "form input", "Mumbai");
+  await typeInto(page3, "form input", "Atlantis");
   await clickButton(page3, "Continue");
   await page3.waitForFunction(() => document.body.textContent.includes("not currently supported"), { timeout: 5000 });
-  report(true, "LIVE: Mumbai → clean unsupported-city error (real backend)");
+  report(true, "LIVE: Atlantis → clean unsupported-city error (real backend)");
 }
 report(consoleErrors2.length === 0, "LIVE: no console errors", consoleErrors2.join(" | "));
 

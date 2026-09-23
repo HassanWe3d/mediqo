@@ -26,8 +26,10 @@ Provider-agnostic design
 
 `get_ai_service()` picks the provider from settings. If the configured
 provider is unavailable or returns malformed output, the service degrades
-to a safe fallback (General Physician / normal) and marks the result
-internally with `source="fallback"` — the API layer strips that marker.
+to the deterministic offline `KeywordProvider` so the user still gets a
+relevant, problem-specific specialty (tooth pain -> Dentist, rash ->
+Dermatologist, ...) instead of the same answer for every request — marked
+internally with `source="fallback"` (the API layer strips that marker).
 """
 
 from __future__ import annotations
@@ -516,15 +518,21 @@ class SnowflakeCortexProvider(OpenAIProvider):
 # Facade — the object the rest of the backend depends on
 # ---------------------------------------------------------------------------
 
-FALLBACK_ANALYSIS = MedicalProblemAnalysis(
-    specialization="General Physician",
-    urgency="normal",
-    summary=(
-        "We could not fully analyze the description. A General Physician "
-        "may be a suitable starting point."
-    ),
-    possible_keywords=[],
-)
+def keyword_fallback_analysis(problem: str) -> MedicalProblemAnalysis:
+    """Deterministic per-problem fallback for provider outages.
+
+    Reuses the offline KeywordProvider rules, so a provider outage still
+    yields a relevant specialty per description (tooth pain -> Dentist,
+    rash -> Dermatologist, vague text -> General Physician). Returning one
+    canned analysis for every request would silently collapse matching to
+    a single specialty — the whole pipeline would appear to "return the
+    same doctors" whatever the user types.
+
+    Marked internally with `source="fallback"`; the API layer strips it.
+    """
+    return KeywordProvider().analyze_medical_problem(problem).model_copy(
+        update={"source": "fallback"}
+    )
 
 
 class MediqoAIService:
@@ -553,13 +561,18 @@ class MediqoAIService:
             logger.info("Emergency indicators detected; bypassing provider")
             return emergency_analysis()
 
-        # 2. Provider attempt with controlled failure.
+        # 2. Provider attempt with controlled failure. The fallback is the
+        #    deterministic keyword analyzer — per-problem, never a fixed
+        #    response — so an outage degrades quality without collapsing
+        #    every request to the same specialty.
         try:
             analysis = self._provider.analyze_medical_problem(text)
         except AIProviderError as exc:
-            logger.warning("AI provider unavailable (%s); using safe fallback",
-                           exc)
-            return FALLBACK_ANALYSIS.model_copy(update={"source": "fallback"})
+            logger.warning(
+                "AI provider unavailable (%s); using the deterministic "
+                "keyword fallback", exc,
+            )
+            return keyword_fallback_analysis(text)
 
         # 3. Second emergency check on the provider's own output: if it
         #    classified emergency, adopt the fixed emergency response.

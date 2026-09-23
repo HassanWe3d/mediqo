@@ -312,9 +312,9 @@ def main() -> int:
         expect(response.status_code == 200, "AI failure still returns 200")
         body = response.json()
         expect(body["status"] == "success"
-               and body["analysis"]["specialization"] == "General Physician"
-               and body["analysis"]["summary"].startswith("We could not fully analyze"),
-               "AI failure -> GP fallback analysis, safe matching")
+               and body["analysis"]["specialization"] == "Dermatologist"
+               and body["results"][0]["doctor"]["specialization"] == "Dermatologist",
+               "AI failure -> problem-specific keyword fallback, safe matching")
     finally:
         app.dependency_overrides.pop(get_ai_service, None)
 

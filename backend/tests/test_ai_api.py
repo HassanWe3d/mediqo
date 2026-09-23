@@ -108,7 +108,8 @@ def main() -> int:
     finally:
         app.dependency_overrides.pop(get_ai_service, None)
 
-    # 6. AI failure -> controlled fallback (never a crash)
+    # 6. AI failure -> controlled keyword fallback (never a crash, never a
+    #    canned specialty — the deterministic rules keep matching relevant)
     app.dependency_overrides[get_ai_service] = lambda: MediqoAIService(
         StubProvider(error=AIProviderError("simulated outage"))
     )
@@ -117,8 +118,14 @@ def main() -> int:
         expect(response.status_code == 200, "AI failure returns 200 (graceful degradation)",
                f"got {response.status_code}")
         data = response.json()
-        expect(data["specialization"] == "General Physician" and data["urgency"] == "normal",
-               "AI failure -> safe fallback content")
+        expect(data["specialization"] == "Gastroenterologist" and data["urgency"] == "normal",
+               "AI failure -> problem-specific keyword fallback",
+               f"got {data['specialization']}/{data['urgency']}")
+        other = client.post("/analyze-problem",
+                            json={"problem": "My skin has a rash."}).json()
+        expect(other["specialization"] == "Dermatologist"
+               and other["specialization"] != data["specialization"],
+               "Fallback specialty differs per problem through the API")
     finally:
         app.dependency_overrides.pop(get_ai_service, None)
 
