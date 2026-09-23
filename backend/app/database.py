@@ -65,3 +65,17 @@ def init_db() -> None:
     from app import models  # noqa: F401  — registers models on Base.metadata
 
     Base.metadata.create_all(bind=engine)
+
+
+def ensure_schema() -> None:
+    """Idempotent schema initialization for fresh databases (e.g. Render).
+
+    Runs `Base.metadata.create_all()`, which only issues CREATE TABLE for
+    tables that do not exist yet — never ALTER or DROP — so it is safe to
+    call on every boot against both empty and populated databases.
+
+    (`init_db` previously existed but nothing invoked it, so a freshly
+    provisioned production database booted with no tables and every endpoint
+    failed with `relation "doctors" does not exist`.)
+    """
+    init_db()

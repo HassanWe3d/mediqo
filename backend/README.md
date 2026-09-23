@@ -58,7 +58,20 @@ uvicorn app.main:app --reload --port 8000
 
 Interactive docs: <http://localhost:8000/docs>
 
-## AI providers (`/analyze-problem`)
+## Database initialization (automatic)
+
+On every startup the API runs two idempotent steps (see `initialize_database`
+in `app/main.py`):
+
+1. **`ensure_schema()`** — `Base.metadata.create_all()`: creates any missing
+   tables (doctors, reviews). It never alters or drops existing tables, so it
+   is safe against an empty database (e.g. a freshly provisioned Render
+   PostgreSQL) and against a populated one.
+2. **`seed_demo_data()`** — inserts the demo dataset **only if no demo
+   doctors exist yet**; otherwise it exits without changing anything.
+
+`python -m app.seed` (from `backend/`) does the same and can be run manually;
+both paths are safe and repeatable. No data is ever deleted or reset.
 
 The AI service is provider-agnostic (`AI_PROVIDER` in `.env`). All providers
 share the same safety net (deterministic emergency detection, no diagnosis),

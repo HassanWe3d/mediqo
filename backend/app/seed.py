@@ -30,7 +30,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
-from app.database import SessionLocal
+from app.database import SessionLocal, ensure_schema
 from app.models import Doctor, Review
 
 # ---------------------------------------------------------------------------
@@ -443,6 +443,10 @@ def main() -> int:
     print("=" * 50)
     print("All inserted records are FICTIONAL demo data (is_demo = true).")
     print()
+
+    # Idempotent: only creates missing tables; never alters or drops. Lets
+    # the seed run against a fresh/empty database (e.g. Render) as well.
+    ensure_schema()
 
     session = SessionLocal()
     try:
