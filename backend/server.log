@@ -1,0 +1,26 @@
+2026-09-21 16:48:43,744 | INFO     | mediqo | Mediqo API ready
+2026-09-21 16:48:43,746 | DEBUG    | asyncio | Using proactor: IocpProactor
+INFO:     Started server process [5516]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:49404 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49405 - "GET /health/db HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62742 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60590 - "OPTIONS /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60590 - "POST /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60590 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51915 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51915 - "POST /location/manual HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:55989 - "OPTIONS /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55989 - "POST /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55989 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55184 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55184 - "POST /location/manual HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:64281 - "OPTIONS /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64281 - "POST /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64281 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49787 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49787 - "POST /location/manual HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:53541 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53541 - "POST /location/manual HTTP/1.1" 200 OK

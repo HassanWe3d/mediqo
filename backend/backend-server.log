@@ -1,0 +1,864 @@
+2026-09-21 17:57:28,781 | INFO     | mediqo | Mediqo API ready
+2026-09-21 17:57:28,783 | DEBUG    | asyncio | Using proactor: IocpProactor
+INFO:     Started server process [10572]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:49649 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54151 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64669 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64669 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64669 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64669 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 18:43:10,775 | INFO     | mediqo.ai | Emergency indicators detected; bypassing provider
+INFO:     127.0.0.1:64669 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61941 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61941 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61941 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61941 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 18:46:29,327 | INFO     | mediqo.ai | Emergency indicators detected; bypassing provider
+INFO:     127.0.0.1:61941 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58584 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58584 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58584 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58584 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 18:47:24,553 | INFO     | mediqo.ai | Emergency indicators detected; bypassing provider
+INFO:     127.0.0.1:58584 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50759 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50759 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50759 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50759 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 18:48:58,573 | INFO     | mediqo.ai | Emergency indicators detected; bypassing provider
+INFO:     127.0.0.1:50759 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58592 - "OPTIONS /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58592 - "POST /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58592 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51348 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51348 - "POST /location/manual HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:53054 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53054 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53055 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53055 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57433 - "GET /health HTTP/1.1" 200 OK
+2026-09-21 21:08:34,206 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:60984 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60059 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60060 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:16:31,215 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:60059 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:16:31,235 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:60061 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:17:08,212 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+2026-09-21 21:17:08,213 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:60069 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60068 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50609 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:28:11,264 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:50609 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57315 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57315 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57315 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:32:22,719 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56590 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56590 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 21:32:24,438 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:56590 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56590 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 21:32:25,959 | INFO     | mediqo.matching | match: specialty=Ophthalmologist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56590 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:32:26,005 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:59729 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54843 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:39:26,212 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:54843 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64001 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64001 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64001 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:39:50,372 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56022 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56022 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 21:39:52,197 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:56022 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56022 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 21:39:53,795 | INFO     | mediqo.matching | match: specialty=Ophthalmologist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56022 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:39:53,835 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56078 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52078 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52078 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52078 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:41:12,891 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:52456 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52456 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 21:41:14,710 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:52456 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52456 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 21:41:16,323 | INFO     | mediqo.matching | match: specialty=Ophthalmologist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:52456 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:41:16,363 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55742 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60403 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60403 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60403 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:43:21,329 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55400 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55400 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 21:43:23,039 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:55400 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55400 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 21:43:24,600 | INFO     | mediqo.matching | match: specialty=Ophthalmologist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55400 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:43:24,644 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:64973 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62244 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62244 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62244 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:45:40,794 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53324 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53324 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 21:45:42,472 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:53324 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53324 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 21:45:44,006 | INFO     | mediqo.matching | match: specialty=Ophthalmologist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53324 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:45:44,050 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:50785 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59440 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59440 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59440 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:46:39,278 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55063 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55063 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 21:46:41,004 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:55063 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55063 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 21:46:42,523 | INFO     | mediqo.matching | match: specialty=Ophthalmologist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55063 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:46:42,563 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:61761 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49789 - "OPTIONS /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49789 - "POST /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49789 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61214 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61214 - "POST /location/manual HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:65485 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:48:19,379 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65485 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:48:24,418 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:56465 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62276 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62276 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 21:48:30,294 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:62276 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62276 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 21:48:32,032 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:62276 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62276 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 21:48:33,641 | INFO     | mediqo.matching | match: specialty=Ophthalmologist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:62276 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:48:35,146 | INFO     | mediqo.ai | Emergency indicators detected; bypassing provider
+INFO:     127.0.0.1:62276 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51929 - "OPTIONS /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51929 - "POST /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51929 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49649 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49649 - "POST /location/manual HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:64582 - "OPTIONS /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64582 - "POST /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64582 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63475 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63475 - "POST /location/manual HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:60585 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60585 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 21:53:29,159 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:60588 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63027 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63029 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 21:55:36,123 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:63029 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57983 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52753 - "GET /doctors/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52754 - "GET /doctors/1/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52755 - "GET /doctors/999999 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52756 - "GET /doctors/999999 HTTP/1.1" 404 Not Found
+2026-09-21 22:01:55,216 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:63997 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:02:02,212 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:64001 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53277 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53277 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53277 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65195 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65195 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:10:03,283 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53277 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53277 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53277 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58469 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58470 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51907 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51907 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51907 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55762 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55762 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:14:39,507 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:51907 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51907 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51907 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57920 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57921 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62099 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62099 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62099 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64753 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64753 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:15:27,214 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:62099 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62099 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62099 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59079 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59080 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:15:28,241 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:62099 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64896 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64896 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64896 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53557 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53557 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:16:59,077 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:64896 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64896 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64896 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49790 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49791 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:17:00,112 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:64896 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53674 - "OPTIONS /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53674 - "POST /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53674 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49646 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49646 - "POST /location/manual HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:64352 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:18:48,581 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:64352 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:18:53,615 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:60660 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54017 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54017 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 22:18:59,156 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:54017 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54017 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 22:19:00,729 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:54017 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54017 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 22:19:02,249 | INFO     | mediqo.matching | match: specialty=Ophthalmologist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:54017 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:19:03,785 | INFO     | mediqo.ai | Emergency indicators detected; bypassing provider
+INFO:     127.0.0.1:54017 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53656 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53656 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53656 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:19:34,420 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:62082 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62082 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 22:19:36,150 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:62082 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62082 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 22:19:37,689 | INFO     | mediqo.matching | match: specialty=Ophthalmologist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:62082 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:19:37,734 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65216 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65296 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65305 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:20:47,334 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65305 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65306 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65306 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:21:20,036 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65312 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51997 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62294 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62294 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62294 - "OPTIONS /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63154 - "POST /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63154 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62294 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62294 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:29:56,166 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:63154 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63154 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63154 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58655 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58655 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:29:57,127 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:63154 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63154 - "GET /doctors/14 HTTP/1.1" 200 OK
+2026-09-21 22:29:57,174 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:63154 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:29:57,254 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:63154 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:30:32,212 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:54773 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55430 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55430 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55430 - "OPTIONS /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54056 - "POST /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54056 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55430 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55430 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:30:41,072 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:54056 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54056 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54056 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58946 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58946 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:30:42,004 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:54056 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54056 - "GET /doctors/14 HTTP/1.1" 200 OK
+2026-09-21 22:30:42,045 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:54056 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:30:42,120 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:54056 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54056 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54056 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 22:30:45,000 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:54056 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54056 - "GET /doctors/12 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54056 - "GET /doctors/12/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:30:45,097 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:54056 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54056 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54056 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 22:30:46,898 | INFO     | mediqo.matching | match: specialty=Ophthalmologist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:54056 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54056 - "GET /doctors/39 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54056 - "GET /doctors/39/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:30:46,985 | INFO     | mediqo.matching | match: specialty=Ophthalmologist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:54056 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54056 - "POST /location/manual HTTP/1.1" 200 OK
+2026-09-21 22:30:49,090 | INFO     | mediqo.ai | Emergency indicators detected; bypassing provider
+INFO:     127.0.0.1:54056 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62405 - "GET /doctors?page=1&page_size=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54056 - "GET /doctors/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54056 - "GET /doctors/1/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54056 - "GET /doctors/999999 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49791 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49791 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49791 - "OPTIONS /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65002 - "POST /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65002 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49791 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49791 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:31:51,421 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65002 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65002 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65002 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64150 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64150 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:31:52,376 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65002 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65002 - "GET /doctors/14 HTTP/1.1" 200 OK
+2026-09-21 22:31:52,418 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65002 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:31:52,502 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65002 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65002 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65002 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 22:31:55,342 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:65002 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65002 - "GET /doctors/12 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65002 - "GET /doctors/12/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:31:55,421 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:65002 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65002 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65002 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 22:31:57,167 | INFO     | mediqo.matching | match: specialty=Ophthalmologist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65002 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65002 - "GET /doctors/39 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65002 - "GET /doctors/39/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:31:57,271 | INFO     | mediqo.matching | match: specialty=Ophthalmologist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65002 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65002 - "POST /location/manual HTTP/1.1" 200 OK
+2026-09-21 22:31:59,209 | INFO     | mediqo.ai | Emergency indicators detected; bypassing provider
+INFO:     127.0.0.1:65002 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50266 - "GET /doctors?page=1&page_size=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65002 - "GET /doctors/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65002 - "GET /doctors/1/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65002 - "GET /doctors/999999 HTTP/1.1" 404 Not Found
+2026-09-21 22:33:12,837 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:64590 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:33:47,588 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55034 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:33:48,371 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55034 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:33:50,029 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55034 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:33:51,039 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55034 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:33:52,715 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55034 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:33:53,425 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55034 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:33:55,083 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55034 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:33:55,833 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55034 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:33:57,106 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55034 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:33:57,841 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55034 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:33:59,122 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55034 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:33:59,876 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55034 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:34:01,545 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55034 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:34:02,505 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55034 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55034 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:34:40,197 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:57522 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:35:15,030 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:51705 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:35:15,675 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:51705 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:35:17,366 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:51705 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:35:18,361 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:51705 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:35:20,047 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:51705 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:35:20,736 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:51705 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:35:22,413 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:51705 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:35:23,275 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:51705 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:35:24,978 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:51705 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:35:25,784 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:51705 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:35:27,462 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:51705 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:35:28,472 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:51705 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:35:30,125 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:51705 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:35:30,845 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:51705 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51705 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:35:53,628 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:64152 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:35:54,330 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:64152 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64152 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64152 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64152 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64152 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:36:03,214 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56234 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:36:04,170 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56234 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56234 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56234 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56234 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56234 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:36:08,993 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56234 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:36:10,235 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56234 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:37:19,540 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:50408 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:37:54,463 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53846 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:37:55,160 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53846 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:37:56,821 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53846 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:37:57,843 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53846 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:37:59,523 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53846 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:38:00,204 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53846 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:38:01,864 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53846 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:38:02,714 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53846 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:38:04,402 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53846 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:38:05,234 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53846 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:38:06,911 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53846 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:38:07,924 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53846 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:38:09,576 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53846 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:38:10,323 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53846 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53846 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:38:32,064 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55705 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:38:32,674 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55705 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55705 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55705 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55705 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55705 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:38:42,336 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:61158 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:38:43,293 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:61158 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61158 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61158 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61158 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61158 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:38:48,112 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:61158 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:38:48,791 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:61158 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:41:35,488 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:60354 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:42:10,435 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53435 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:42:11,894 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53435 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:42:13,570 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53435 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:42:14,589 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53435 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:42:16,282 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53435 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:42:17,027 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53435 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:42:18,712 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53435 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:42:19,721 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53435 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:42:21,361 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53435 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:42:22,063 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53435 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:42:23,494 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53435 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:42:24,501 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53435 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:42:26,219 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53435 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:42:26,945 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:53435 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53435 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:42:49,850 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56177 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:42:50,637 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56177 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56177 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56177 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56177 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56177 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:42:59,461 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:62961 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:43:00,410 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:62961 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62961 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62961 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62961 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62961 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:43:05,257 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:62961 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:43:06,486 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:62961 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55541 - "GET /doctors/999999 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64123 - "GET /doctors/999999 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53755 - "OPTIONS /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53755 - "POST /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53755 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59170 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59170 - "POST /location/manual HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:65115 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:47:02,362 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65115 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:47:07,283 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:65115 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51515 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51515 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 22:47:12,586 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:51515 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51515 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 22:47:14,082 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:51515 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51515 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 22:47:15,611 | INFO     | mediqo.matching | match: specialty=Ophthalmologist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:51515 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:47:17,113 | INFO     | mediqo.ai | Emergency indicators detected; bypassing provider
+INFO:     127.0.0.1:51515 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54809 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54809 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54809 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:47:48,050 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:50836 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50836 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 22:47:49,876 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:50836 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50836 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 22:47:51,455 | INFO     | mediqo.matching | match: specialty=Ophthalmologist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:50836 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:47:51,498 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55802 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61793 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61793 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61793 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60760 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60760 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:48:20,706 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:61793 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61793 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61793 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50112 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50113 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:48:21,733 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:61793 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57740 - "OPTIONS /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57740 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57740 - "OPTIONS /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65103 - "POST /location/validate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65103 - "OPTIONS /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57740 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57740 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:48:56,258 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65103 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65103 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65103 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58288 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58288 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:48:57,160 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65103 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65103 - "GET /doctors/14 HTTP/1.1" 200 OK
+2026-09-21 22:48:57,197 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65103 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:48:57,260 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65103 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65103 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65103 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 22:49:00,118 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:65103 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65103 - "GET /doctors/12 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65103 - "GET /doctors/12/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:49:00,185 | INFO     | mediqo.matching | match: specialty=Dermatologist urgency=normal candidates=4 returned=4 fallback=False language=none
+INFO:     127.0.0.1:65103 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65103 - "POST /location/manual HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65103 - "POST /analyze-problem HTTP/1.1" 200 OK
+2026-09-21 22:49:01,945 | INFO     | mediqo.matching | match: specialty=Ophthalmologist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65103 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65103 - "GET /doctors/39 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65103 - "GET /doctors/39/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:49:02,013 | INFO     | mediqo.matching | match: specialty=Ophthalmologist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65103 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65103 - "POST /location/manual HTTP/1.1" 200 OK
+2026-09-21 22:49:03,897 | INFO     | mediqo.ai | Emergency indicators detected; bypassing provider
+INFO:     127.0.0.1:65103 - "POST /analyze-problem HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59881 - "GET /doctors?page=1&page_size=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65103 - "GET /doctors/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65103 - "GET /doctors/1/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65103 - "GET /doctors/999999 HTTP/1.1" 404 Not Found
+2026-09-21 22:49:12,377 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:64248 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:49:46,803 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56132 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:49:47,851 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56132 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:49:49,470 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56132 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:49:50,488 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56132 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:49:52,136 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56132 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:49:52,868 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56132 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:49:54,542 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56132 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:49:55,567 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56132 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:49:57,216 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56132 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:49:57,931 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56132 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:49:59,590 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56132 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:50:00,600 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56132 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:50:02,282 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56132 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:50:02,967 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:56132 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56132 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:50:25,608 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:63685 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:50:26,510 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:63685 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63685 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63685 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63685 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63685 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:50:35,147 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65476 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:50:35,999 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65476 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65476 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65476 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65476 - "GET /doctors/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65476 - "GET /doctors/14/reviews?page=1&page_size=10 HTTP/1.1" 200 OK
+2026-09-21 22:50:40,188 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65476 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:50:41,343 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:65476 - "POST /match-doctors HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53964 - "GET /doctors/999999 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55287 - "OPTIONS /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:52:32,650 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55287 - "POST /match-doctors HTTP/1.1" 200 OK
+2026-09-21 22:52:57,018 | INFO     | mediqo.matching | match: specialty=Dentist urgency=normal candidates=5 returned=5 fallback=False language=none
+INFO:     127.0.0.1:55288 - "POST /match-doctors HTTP/1.1" 200 OK
