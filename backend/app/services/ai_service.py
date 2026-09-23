@@ -20,6 +20,9 @@ Provider-agnostic design
 - `OpenAIProvider`   — any OpenAI-compatible chat-completions API
   (OpenAI, Azure OpenAI, local gateways...) configured via env vars.
   Never hardcode keys; the key is read from Settings only.
+- `SnowflakeCortexProvider` — Snowflake Cortex REST API via its
+  OpenAI-compatible Chat Completions endpoint (a thin subclass of
+  OpenAIProvider: same prompt, parsing and response contract).
 
 `get_ai_service()` picks the provider from settings. If the configured
 provider is unavailable or returns malformed output, the service degrades
@@ -395,6 +398,21 @@ class OpenAIProvider:
         self._base_url = settings.ai_base_url.rstrip("/")
         self._timeout = settings.ai_timeout_seconds
 
+    def _messages(self, problem: str) -> list[dict[str, str]]:
+        return [
+            {"role": "system", "content": _SYSTEM_PROMPT},
+            {"role": "user", "content": problem},
+        ]
+
+    def _request_payload(self, problem: str) -> dict:
+        """OpenAI-compatible Chat Completions request body."""
+        return {
+            "model": self._model,
+            "messages": self._messages(problem),
+            "temperature": 0.1,
+            "max_tokens": 300,
+        }
+
     def analyze_medical_problem(self, problem: str) -> MedicalProblemAnalysis:
         try:
             response = httpx.post(
@@ -403,15 +421,7 @@ class OpenAIProvider:
                     "Authorization": f"Bearer {self._api_key}",
                     "Content-Type": "application/json",
                 },
-                json={
-                    "model": self._model,
-                    "messages": [
-                        {"role": "system", "content": _SYSTEM_PROMPT},
-                        {"role": "user", "content": problem},
-                    ],
-                    "temperature": 0.1,
-                    "max_tokens": 300,
-                },
+                json=self._request_payload(problem),
                 timeout=self._timeout,
             )
             response.raise_for_status()
@@ -461,6 +471,36 @@ class OpenAIProvider:
             summary=summary.strip()[:500],
             possible_keywords=keywords,
         )
+
+
+# ---------------------------------------------------------------------------
+# SnowflakeCortexProvider — Snowflake Cortex REST API (Chat Completions)
+# ---------------------------------------------------------------------------
+
+class SnowflakeCortexProvider(OpenAIProvider):
+    """Snowflake Cortex REST API via its OpenAI-compatible Chat Completions.
+
+    Endpoint (docs.snowflake.com → Cortex REST API):
+        POST {AI_BASE_URL}/chat/completions
+        Authorization: Bearer <Snowflake PAT>
+
+    AI_BASE_URL must be the account's Cortex v1 base, e.g.
+        https://<account-identifier>.snowflakecomputing.com/api/v2/cortex/v1
+    The PAT, account host and model come exclusively from Settings (env:
+    AI_API_KEY / AI_BASE_URL / AI_MODEL) and are never hardcoded or logged.
+
+    Because the Cortex Chat Completions API follows the OpenAI
+    specification, this provider reuses the OpenAIProvider system prompt,
+    response parsing and normalization unchanged — /analyze-problem returns
+    the exact same schema whatever provider is configured. The request body
+    is exactly {"model": ..., "messages": [...]}: sampling-parameter extras
+    are omitted so gpt-5-family models cannot reject them.
+    """
+
+    name = "snowflake"
+
+    def _request_payload(self, problem: str) -> dict:
+        return {"model": self._model, "messages": self._messages(problem)}
 
 
 # ---------------------------------------------------------------------------
@@ -528,6 +568,15 @@ def get_ai_service() -> AIService:
         except AIProviderError:
             logger.warning(
                 "AI_PROVIDER=openai but no API key is configured; "
+                "falling back to the offline keyword provider"
+            )
+    elif provider_name == "snowflake":
+        try:
+            return MediqoAIService(SnowflakeCortexProvider())
+        except AIProviderError:
+            # No PAT configured — degrade to the offline rules, never crash.
+            logger.warning(
+                "AI_PROVIDER=snowflake but AI_API_KEY is not configured; "
                 "falling back to the offline keyword provider"
             )
     return MediqoAIService(KeywordProvider())

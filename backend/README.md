@@ -58,6 +58,34 @@ uvicorn app.main:app --reload --port 8000
 
 Interactive docs: <http://localhost:8000/docs>
 
+## AI providers (`/analyze-problem`)
+
+The AI service is provider-agnostic (`AI_PROVIDER` in `.env`). All providers
+share the same safety net (deterministic emergency detection, no diagnosis),
+the same validation/normalization, and the exact same response schema.
+
+| `AI_PROVIDER` | Behavior |
+|---------------|----------|
+| `keyword` *(default)* | Offline deterministic rule-based analyzer. No key, no network. |
+| `openai` | Any OpenAI-compatible Chat Completions API. |
+| `snowflake` | Snowflake Cortex REST API via its OpenAI-compatible Chat Completions endpoint. |
+
+Snowflake Cortex configuration (all from environment — never hardcoded):
+
+```env
+AI_PROVIDER=snowflake
+AI_API_KEY=<Snowflake PAT>
+AI_MODEL=openai-gpt-5-mini
+AI_BASE_URL=https://<account>.snowflakecomputing.com/api/v2/cortex/v1
+AI_TIMEOUT_SECONDS=10
+```
+
+The provider POSTs `{AI_BASE_URL}/chat/completions` with
+`Authorization: Bearer <PAT>` and body `{"model": ..., "messages": [...]}`.
+If Cortex is unavailable, returns an error, or emits malformed output, the
+service degrades to the safe fallback (General Physician / normal) exactly
+like the other providers — the API never exposes the PAT or upstream errors.
+
 ## Project layout
 
 ```

@@ -41,8 +41,10 @@ class Settings(BaseSettings):
     cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
 
     # ---- AI provider (used from Step 5 onwards) ----
-    # "keyword" = offline deterministic rule-based analyzer (no key needed)
-    # "openai"  = any OpenAI-compatible chat-completions API (set AI_API_KEY)
+    # "keyword"   = offline deterministic rule-based analyzer (no key needed)
+    # "openai"    = any OpenAI-compatible chat-completions API (set AI_API_KEY)
+    # "snowflake" = Snowflake Cortex REST API, OpenAI-compatible Chat
+    #               Completions (AI_BASE_URL = https://<account>.snowflakecomputing.com/api/v2/cortex/v1)
     ai_provider: str = "keyword"
     ai_api_key: str = ""
     ai_model: str = "gpt-4o-mini"
