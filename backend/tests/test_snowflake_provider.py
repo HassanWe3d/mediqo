@@ -181,6 +181,24 @@ def main() -> int:
                "Invalid urgency normalized to normal (specialty preserved)",
                f"got {analysis.urgency}")
 
+        # LLM-style specialty naming variants normalize to canonical values
+        # instead of being rejected (which would silently trigger fallback)
+        for variant, canonical in [
+            ("Dermatology", "Dermatologist"),
+            ("Dentistry", "Dentist"),
+            ("orthopedics", "Orthopedic"),
+            ("General Medicine", "General Physician"),
+            ("ENT", "ENT Specialist"),
+        ]:
+            with mock.patch("app.services.ai_service.httpx.post") as post:
+                post.return_value = FakeResponse(200, cortex_body(
+                    '{"specialization": "%s", "urgency": "normal",'
+                    ' "summary": "x", "possible_keywords": []}' % variant))
+                analysis = provider.analyze_medical_problem("I need help.")
+            expect(analysis.specialization == canonical,
+                   f"Variant {variant!r} normalizes to {canonical!r}",
+                   f"got {analysis.specialization!r}")
+
     # --- 5. Cortex API error (401) -> controlled, secret-free failure ---
     with patched_env():
         provider = make_provider()

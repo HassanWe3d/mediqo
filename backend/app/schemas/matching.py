@@ -25,6 +25,69 @@ SUPPORTED_SPECIALIZATIONS: list[str] = [
     "Ophthalmologist",
 ]
 
+# Common naming variants -> the canonical value used by the doctor database
+# and the public API. One centralized normalization layer: the AI provider,
+# the matching engine and any future intake all resolve names through this
+# table instead of scattering ad-hoc string fixes through the code.
+_SPECIALIZATION_ALIASES: dict[str, str] = {
+    "dermatology": "Dermatologist",
+    "dermatologist": "Dermatologist",
+    "skin specialist": "Dermatologist",
+    "dentistry": "Dentist",
+    "dental": "Dentist",
+    "dental surgeon": "Dentist",
+    "dentist": "Dentist",
+    "orthopedics": "Orthopedic",
+    "orthopaedics": "Orthopedic",
+    "orthopaedic": "Orthopedic",
+    "orthopedist": "Orthopedic",
+    "orthopedic": "Orthopedic",
+    "bone and joint specialist": "Orthopedic",
+    "ophthalmology": "Ophthalmologist",
+    "eye specialist": "Ophthalmologist",
+    "ophthalmologist": "Ophthalmologist",
+    "pediatrics": "Pediatrician",
+    "paediatrics": "Pediatrician",
+    "child specialist": "Pediatrician",
+    "pediatrician": "Pediatrician",
+    "cardiology": "Cardiologist",
+    "cardiologist": "Cardiologist",
+    "heart specialist": "Cardiologist",
+    "gastroenterology": "Gastroenterologist",
+    "gastroenterologist": "Gastroenterologist",
+    "stomach specialist": "Gastroenterologist",
+    "gynecology": "Gynecologist",
+    "gynaecology": "Gynecologist",
+    "gynecologist": "Gynecologist",
+    "gynaecologist": "Gynecologist",
+    "neurology": "Neurologist",
+    "neurologist": "Neurologist",
+    "ent": "ENT Specialist",
+    "ent specialist": "ENT Specialist",
+    "otolaryngologist": "ENT Specialist",
+    "ent (ear, nose and throat)": "ENT Specialist",
+    "general medicine": "General Physician",
+    "general practice": "General Physician",
+    "general practitioner": "General Physician",
+    "internal medicine": "General Physician",
+    "family medicine": "General Physician",
+    "general physician": "General Physician",
+}
+
+
+def normalize_specialization(raw: object) -> str | None:
+    """Resolve a specialty name (or common variant) to its canonical form.
+
+    Handles capitalization, surrounding whitespace and naming variations
+    ("Dermatology" -> "Dermatologist", "Dentistry" -> "Dentist",
+    "General Medicine" -> "General Physician", ...). Returns None for
+    anything that is not a supported specialty — callers decide whether
+    that means "reject" or "treat as unknown".
+    """
+    if not isinstance(raw, str):
+        return None
+    return _SPECIALIZATION_ALIASES.get(raw.strip().lower())
+
 Specialization = Literal[
     "General Physician",
     "Cardiologist",

@@ -112,6 +112,9 @@ def main() -> int:
            f"got {combined}")
 
     # ---- Pipeline: specialty routing (scenarios 1-4) ----
+    # Lucknow supplies every specialty; specialists lead, and when the local
+    # specialty has fewer than 5 doctors, honestly-labelled General
+    # Physicians top the list up (ranked after every specialist).
     for problem, expected_spec in [
         ("I have severe tooth pain", "Dentist"),
         ("I have a skin rash", "Dermatologist"),
@@ -122,9 +125,14 @@ def main() -> int:
         expect(body["status"] == "success"
                and body["analysis"]["specialization"] == expected_spec
                and body["total_results"] > 0
-               and all(r["doctor"]["specialization"] == expected_spec for r in body["results"]),
-               f"'{problem}' -> {expected_spec} results",
+               and body["results"][0]["doctor"]["specialization"] == expected_spec,
+               f"'{problem}' -> {expected_spec} leads the results",
                f"got {body['analysis']['specialization']} / {body['total_results']} results")
+        gp_tails = [r for r in body["results"]
+                    if r["doctor"]["specialization"] != expected_spec]
+        expect(all("General Physician — nearest available alternative"
+                   in r["match_reasons"] for r in gp_tails),
+               f"'{problem}': any non-specialist members are honestly labelled")
 
     # ---- Scenario 12: maximum 5 results ----
     body = match("I feel unwell and weak")  # General Physician: 6 in DB

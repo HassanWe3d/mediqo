@@ -81,9 +81,14 @@ def verify_match_shape(body: dict, expected_specialization: str) -> None:
            "  urgency is not emergency")
     expect(0 < body["total_results"] <= 5 and len(body["results"]) <= 5,
            "  at most 5 doctors returned")
-    expect(all(r["doctor"]["specialization"] == expected_specialization
-               for r in body["results"]),
-           "  every returned doctor matches the identified specialty")
+    # Specialists lead; when the local specialty has fewer than 5 doctors,
+    # honestly-labelled General Physicians top up the list (never silently).
+    expect(body["results"][0]["doctor"]["specialization"] == expected_specialization
+           and all(r["doctor"]["specialization"] == expected_specialization
+                   or "General Physician — nearest available alternative"
+                   in r["match_reasons"]
+                   for r in body["results"]),
+           "  specialists lead; any GP top-up members are honestly labelled")
     expect(all(isinstance(r["distance_km"], (int, float)) and r["distance_km"] >= 0
                for r in body["results"]),
            "  distance_km present and non-negative")

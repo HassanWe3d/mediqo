@@ -45,6 +45,7 @@ from app.config import settings
 from app.schemas.matching import (
     SUPPORTED_SPECIALIZATIONS,
     MedicalProblemAnalysis,
+    normalize_specialization,
 )
 
 logger = logging.getLogger("mediqo.ai")
@@ -242,14 +243,17 @@ def emergency_analysis() -> MedicalProblemAnalysis:
 
 
 def _validate_specialization(raw: object) -> str | None:
-    """Return the exact supported specialization name, or None."""
-    if not isinstance(raw, str):
+    """Normalize a model-returned specialty to its canonical name, or None.
+
+    Uses the centralized normalization layer, so naming variants the LLM
+    might legitimately emit ("Dermatology", "Dentistry", "General
+    Medicine", "ENT", ...) resolve to the exact database values instead of
+    being rejected — which previously degraded the request to the fallback.
+    """
+    normalized = normalize_specialization(raw)
+    if normalized is None:
         return None
-    lowered = raw.strip().lower()
-    for known in SUPPORTED_SPECIALIZATIONS:
-        if known.lower() == lowered:
-            return known
-    return None
+    return normalized if normalized in SUPPORTED_SPECIALIZATIONS else None
 
 
 # ---------------------------------------------------------------------------

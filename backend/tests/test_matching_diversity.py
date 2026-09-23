@@ -25,6 +25,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from fastapi.testclient import TestClient
 from sqlalchemy import func, select
 
+SUPPORTED_NAMES = {  # canonical values the normalization layer must map into
+    "General Physician", "Cardiologist", "Dermatologist", "Dentist",
+    "Orthopedic", "Gastroenterologist", "ENT Specialist", "Pediatrician",
+    "Gynecologist", "Neurologist", "Ophthalmologist",
+}
+
 from app.database import SessionLocal
 from app.main import app
 from app.models import Doctor
@@ -138,6 +144,9 @@ def main() -> int:
     for city, specialization in city_cases:
         response = match_at(city, specialization)
         local_count = count_in_db(specialization, city)
+        gp_count = (0 if specialization == "General Physician"
+                    else count_in_db("General Physician", city))
+        expected_count = min(MAX_RESULTS, local_count + gp_count)
         expect(response.status == "success",
                f"{city} + {specialization}: success",
                f"got {response.status} {response.message!r}")
@@ -145,10 +154,22 @@ def main() -> int:
         expect(returned_cities == {city},
                f"{city} + {specialization}: every result is in {city}",
                f"got {sorted(returned_cities)}")
-        expect(response.total_results == min(MAX_RESULTS, local_count)
+        expect(response.total_results == expected_count
                and len(response.results) == response.total_results,
-               f"{city} + {specialization}: result count matches local supply",
-               f"expected {min(MAX_RESULTS, local_count)}, got {response.total_results}")
+               f"{city} + {specialization}: up to 5 results (specialists + GP top-up)",
+               f"expected {expected_count}, got {response.total_results}")
+        if local_count:
+            expect(response.results[0].doctor.specialization == specialization,
+                   f"{city} + {specialization}: the specialist ranks first",
+                   f"got {response.results[0].doctor.specialization}")
+            expect(all(item.doctor.specialization == specialization
+                       for item in response.results[:local_count]),
+                   f"{city} + {specialization}: all specialists outrank GP members")
+        expect(all("General Physician — nearest available alternative"
+                   in item.match_reasons
+                   for item in response.results
+                   if item.doctor.specialization != specialization),
+               f"{city} + {specialization}: GP top-up members are honestly labelled")
 
     # Distances must be city-scale now (the old behaviour returned Lucknow
     # doctors 400-1900 km away with flattened scores).
@@ -252,6 +273,72 @@ def main() -> int:
     expect(reachable == set(problem_map.values()) | {"Gynecologist", "Neurologist"}
            or reachable >= {"General Physician"},
            "All supported specialties have doctors in the dataset")
+
+    # ------------------------------------------------------------------
+    # 5b. Centralized specialty normalization ("Dermatology" -> "Dermatologist")
+    # ------------------------------------------------------------------
+    from app.schemas.matching import normalize_specialization  # noqa: E402
+
+    alias_cases = {
+        "Dermatology": "Dermatologist",
+        "dentistry": "Dentist",
+        "ORTHOPEDICS": "Orthopedic",
+        "Ophthalmology": "Ophthalmologist",
+        "Pediatrics": "Pediatrician",
+        "General Medicine": "General Physician",
+        "ENT": "ENT Specialist",
+        "  Dermatologist  ": "Dermatologist",
+    }
+    for raw, expected in alias_cases.items():
+        expect(normalize_specialization(raw) == expected,
+               f"normalize_specialization({raw!r}) -> {expected}",
+               f"got {normalize_specialization(raw)!r}")
+    expect(normalize_specialization("Cardio-thoracic Wizard") is None,
+           "Unknown specialty does not normalize")
+    expect(normalize_specialization(42) is None,
+           "Non-string input does not normalize")
+
+    # The AI provider's output validation accepts LLM-style variants now.
+    provider_result = KeywordProvider().analyze_medical_problem("placeholder")
+    expect(provider_result.specialization in SUPPORTED_NAMES,
+           "Keyword provider output remains canonical",
+           f"got {provider_result.specialization}")
+
+    # ------------------------------------------------------------------
+    # 5c. Same city, different problems -> specialists rise per problem
+    # (Gorakhpur regression: thin-market cities must still differentiate)
+    # ------------------------------------------------------------------
+    gorakhpur_problems = {
+        "I have back pain and knee pain": "Orthopedic",
+        "My eyes are red and painful": "Ophthalmologist",
+        "I have a sore throat and ear pain": "ENT Specialist",
+        "I have fever and body ache": "General Physician",
+    }
+    top_doctors: dict[str, str] = {}
+    for problem, expected_spec in gorakhpur_problems.items():
+        an = KeywordProvider().analyze_medical_problem(problem)
+        expect(an.specialization == expected_spec,
+               f"Gorakhpur regression: '{problem[:30]}...' -> {expected_spec}",
+               f"got {an.specialization}")
+        resp = match_at("Gorakhpur", an.specialization)
+        expect(bool(resp.results)
+               and resp.results[0].doctor.specialization == expected_spec,
+               f"Gorakhpur + {expected_spec}: specialist ranks first",
+               f"got {resp.results[0].doctor.specialization if resp.results else 'none'}")
+        top_doctors[expected_spec] = resp.results[0].doctor.name
+    expect(len(set(top_doctors.values())) == len(top_doctors),
+           "Gorakhpur: different problems surface different top specialists",
+           f"tops: {top_doctors}")
+
+    # Thin-market top-up: Mumbai has exactly 1 dentist and 2 GPs -> the
+    # dentist leads and GPs fill the remaining slots, honestly labelled.
+    mumbai_tooth = match_at("Mumbai", "Dentist")
+    expect(mumbai_tooth.total_results == 3
+           and mumbai_tooth.results[0].doctor.specialization == "Dentist"
+           and all(item.doctor.specialization == "General Physician"
+                   for item in mumbai_tooth.results[1:]),
+           "Mumbai + Dentist: 1 specialist + GP top-up, specialist first",
+           f"got {[ (i.doctor.specialization, i.match_score) for i in mumbai_tooth.results ]}")
 
     # ------------------------------------------------------------------
     # 6. No-match (simulated empty specialty) + emergency gate + API contracts

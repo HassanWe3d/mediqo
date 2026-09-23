@@ -60,9 +60,12 @@ MAX_RESULTS = 5  # "the most suitable ones" — never dump the whole database
 # Smooth exponential decay — no abrupt cliff at an arbitrary radius.
 DISTANCE_DECAY_KM = 5.0
 
-# If the AI-identified specialty has no doctors, fall back to General
-# Physicians — clearly marked, never silent. Their specialization score
-# is lower than an exact match, and reasons say so.
+# General Physicians join a result list in two controlled ways: when the
+# AI-identified specialty has no doctors within reach (the classic clearly-
+# marked fallback) and as a top-up when the specialty supplies fewer than
+# MAX_RESULTS doctors locally. Their specialization score is lower than an
+# exact match (60 vs 100), so a correct specialist can never be outranked
+# by a GP's distance/rating, and every GP member carries an honest reason.
 GP_FALLBACK_SPECIALIZATION_SCORE = 60.0
 
 # "Highly rated" reason threshold (rating is only 10% of the score — it can
@@ -296,16 +299,47 @@ def match_from_analysis(
 
     now = datetime.now()
 
-    # Candidates: the AI-selected specialty within the service radius. If
-    # nobody in that specialty is within reach, the controlled General
-    # Physician fallback applies — also within the radius, clearly marked.
-    # An empty result after both is an honest no_match; it is never filled
-    # with far-away specialists the user cannot realistically visit.
-    doctors = _within_radius(_query_by_specialization(db, requested))
-    fallback = False
-    if not doctors:
-        doctors = _within_radius(_query_by_specialization(db, "General Physician"))
-        fallback = bool(doctors)
+    # Two-stage candidate selection (everything stays inside the service
+    # radius — doctors beyond it are never smuggled into the list):
+    #
+    #   Stage 1 — the AI-identified specialty. These doctors receive the
+    #   full specialization score, so the correct specialist always
+    #   outranks a GP/other-specialist with better distance or rating.
+    #
+    #   Stage 2 — General Physicians, used in two controlled ways:
+    #     a) the requested specialty does not exist within reach at all:
+    #        the classic clearly-marked GP fallback (message + reasons);
+    #     b) it exists but supplies fewer than MAX_RESULTS doctors: GPs
+    #        TOP UP the list, ranked below every specialist because their
+    #        specialization score is GP_FALLBACK_SPECIALIZATION_SCORE
+    #        (not 100), and each carries the honest fallback reason. The
+    #        user sees up to MAX_RESULTS relevant local options without
+    #        inventing doctors or diluting the specialist-first ranking.
+    #
+    # An empty result after both is an honest no_match.
+    specialists = _within_radius(_query_by_specialization(db, requested))
+    general_practitioners = (
+        [] if requested == "General Physician"
+        else _within_radius(_query_by_specialization(db, "General Physician"))
+    )
+
+    fallback = False  # requested specialty entirely absent within reach
+    if specialists:
+        doctors: list[Doctor] = list(specialists)
+        if len(specialists) < MAX_RESULTS and general_practitioners:
+            # Top up with the nearest GPs; the weighted sort below decides
+            # the published order (specialists still outrank them).
+            general_practitioners.sort(
+                key=lambda d: calculate_distance(
+                    latitude, longitude, d.latitude, d.longitude
+                )
+            )
+            doctors += general_practitioners[: MAX_RESULTS - len(specialists)]
+    elif general_practitioners:
+        doctors = list(general_practitioners)
+        fallback = True
+    else:
+        doctors = []
 
     if not doctors:
         logger.info("match: no candidates within the service radius for '%s'", requested)
@@ -317,15 +351,24 @@ def match_from_analysis(
             message=NO_MATCH_MESSAGE,
         )
 
-    scored: list[tuple[int, float, float, MatchResult]] = []
+    # scored tuples: (tier, match_score, distance_km, rating, result)
+    # Tier 0 = the exact requested specialization, tier 1 = GP members.
+    # Tiers are ordered BEFORE scores (stage 2 before stage 3): only the
+    # correct specialists compete for the top slots — a GP can never leapfrog
+    # a specialist via distance/rating alone — while each tier stays ranked
+    # by the unchanged weighted score. Every published score remains the
+    # honest weighted value for that doctor.
+    scored: list[tuple[int, int, float, float, MatchResult]] = []
     for doctor in doctors:
         distance_km = calculate_distance(latitude, longitude, doctor.latitude, doctor.longitude)
         availability, availability_reason = availability_score(doctor.availability, now)
+        # Tier-aware per doctor: only the exact requested specialization
+        # gets the full score — a GP (fallback or top-up member) can never
+        # outrank the correct specialist via distance/rating alone.
+        is_specialist = doctor.specialization == requested
         component_scores = {
             "specialization": (
-                100.0
-                if not fallback or doctor.specialization == requested
-                else GP_FALLBACK_SPECIALIZATION_SCORE
+                100.0 if is_specialist else GP_FALLBACK_SPECIALIZATION_SCORE
             ),
             "distance": distance_score(distance_km),
             "availability": availability,
@@ -334,10 +377,12 @@ def match_from_analysis(
         }
         match_score = combine_scores(component_scores)
         reasons = build_match_reasons(
-            doctor, distance_km, availability_reason, preferred_language, fallback
+            doctor, distance_km, availability_reason, preferred_language,
+            fallback=not is_specialist,
         )
         scored.append(
             (
+                0 if is_specialist else 1,
                 match_score,
                 distance_km,
                 float(doctor.rating),
@@ -350,15 +395,18 @@ def match_from_analysis(
             )
         )
 
-    # Deterministic order: score desc, then distance asc, then rating desc.
-    scored.sort(key=lambda item: (-item[0], item[1], -item[2]))
+    # Deterministic order: tier (specialists first), then score desc,
+    # then distance asc, then rating desc.
+    scored.sort(key=lambda item: (item[0], -item[1], item[2], -item[3]))
     top = scored[:MAX_RESULTS]
 
     logger.info(
-        "match: specialty=%s urgency=%s candidates=%d returned=%d fallback=%s language=%s",
+        "match: specialty=%s urgency=%s specialists=%d gp_members=%d "
+        "returned=%d fallback=%s language=%s",
         requested,
         analysis.urgency,
-        len(doctors),
+        len(specialists),
+        sum(1 for d in doctors if d.specialization != requested),
         len(top),
         fallback,
         preferred_language or "none",
@@ -367,7 +415,7 @@ def match_from_analysis(
     return MatchResponse(
         status="success",
         analysis=analysis,
-        results=[item[3] for item in top],
+        results=[item[4] for item in top],
         total_results=len(top),
         message=FALLBACK_MESSAGE if fallback else None,
     )
