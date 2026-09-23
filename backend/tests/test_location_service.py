@@ -108,14 +108,16 @@ def main() -> int:
                "City resolution is case-insensitive")
         expect(resolve_city("  lucknow  ", session) is not None,
                "City resolution tolerates surrounding whitespace")
-        expect(resolve_city("Delhi", session) is None,
-               "Unsupported city ('Delhi' — no doctors) is rejected")
+        expect(resolve_city("Delhi", session) is not None,
+               "Metro city ('Delhi') resolves after the dataset expansion")
+        expect(resolve_city("Paris", session) is None,
+               "Unsupported city ('Paris' — never a Mediqo market) is rejected")
         expect(resolve_city("", session) is None, "Empty city is rejected")
 
         cities = get_supported_cities(session)
         city_names = [name for name, _ in cities]
-        expect(city_names[0] == "Lucknow" and dict(cities)["Lucknow"] == 40,
-               "Supported cities list is DB-driven, Lucknow first with 40 doctors",
+        expect(city_names[0] == "Lucknow" and dict(cities)["Lucknow"] == 43,
+               "Supported cities list is DB-driven, Lucknow first (deepest market)",
                f"got {cities}")
     finally:
         session.close()
@@ -143,7 +145,15 @@ def main() -> int:
            "Manual response includes city-center coordinates for matching")
     response = client.post("/location/manual", json={"city": " lucknow "})
     expect(response.status_code == 200, "Manual endpoint is case/space tolerant")
+    # Manual fallback resolves a real metro — non-UP users can complete the flow
+    response = client.post("/location/manual", json={"city": "Mumbai"})
+    body = response.json()
+    expect(response.status_code == 200 and body["valid"] is True and body["city"] == "Mumbai",
+           "POST /location/manual resolves Mumbai (metro fallback works)", f"got {response.text[:120]}")
     response = client.post("/location/manual", json={"city": "Delhi"})
+    expect(response.status_code == 200 and response.json()["city"] == "Delhi",
+           "POST /location/manual resolves Delhi", f"got {response.status_code}")
+    response = client.post("/location/manual", json={"city": "Atlantis"})
     expect(response.status_code == 400
            and response.json()["detail"] == "This location is not currently supported.",
            "Unsupported city returns clean 400 with the spec message",
@@ -155,7 +165,7 @@ def main() -> int:
     response = client.get("/location/cities")
     cities = response.json()
     expect(response.status_code == 200 and cities[0]["city"] == "Lucknow"
-           and cities[0]["doctor_count"] == 40,
+           and cities[0]["doctor_count"] == 43,
            "GET /location/cities returns DB-driven city list",
            f"got {response.text[:160]}")
     expect(all(c["latitude"] is not None for c in cities),

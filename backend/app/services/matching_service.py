@@ -79,6 +79,21 @@ EMERGENCY_MESSAGE = (
 NO_MATCH_MESSAGE = "We couldn't find a matching specialist nearby."
 FALLBACK_MESSAGE = "Specialist unavailable nearby — showing General Physicians."
 
+# Service radius: doctors farther than this are NOT candidates for normal
+# matching (they are excluded, not merely down-ranked). The exponential
+# distance score alone reaches ~0 long before the radius, so a candidate
+# set that extends past it only produced indistinguishable "distance-blind"
+# lists — the same far-away doctors shown to every user.
+#
+# 100 km is chosen to keep metro clusters distinct (Mumbai↔Pune ≈ 120 km
+# and the three Kerala cities ≈ 160+ km apart never blend into one result
+# list) while the realistic Lucknow↔Kanpur corridor (≈ 75 km) stays within
+# reach. If the radius empties the candidate set, the existing clearly-
+# marked General Physician fallback applies *within* the radius; if even
+# that fails, the response is an explicit no_match. The frontend already
+# labels fallback results.
+MAX_SERVICE_RADIUS_KM = 100.0
+
 _DAY_KEYS = ("mon", "tue", "wed", "thu", "fri", "sat", "sun")
 _DAY_NAMES = {
     "mon": "Monday", "tue": "Tuesday", "wed": "Wednesday", "thu": "Thursday",
@@ -271,15 +286,29 @@ def match_from_analysis(
     preferred_language = (language or "").strip() or None
     requested = analysis.specialization
 
-    doctors = _query_by_specialization(db, requested)
+    def _within_radius(candidates: list[Doctor]) -> list[Doctor]:
+        """Keep only doctors within the service radius (see the constant)."""
+        return [
+            d for d in candidates
+            if calculate_distance(latitude, longitude, d.latitude, d.longitude)
+            <= MAX_SERVICE_RADIUS_KM
+        ]
+
+    now = datetime.now()
+
+    # Candidates: the AI-selected specialty within the service radius. If
+    # nobody in that specialty is within reach, the controlled General
+    # Physician fallback applies — also within the radius, clearly marked.
+    # An empty result after both is an honest no_match; it is never filled
+    # with far-away specialists the user cannot realistically visit.
+    doctors = _within_radius(_query_by_specialization(db, requested))
     fallback = False
     if not doctors:
-        # Controlled fallback: General Physicians only, clearly marked.
-        doctors = _query_by_specialization(db, "General Physician")
+        doctors = _within_radius(_query_by_specialization(db, "General Physician"))
         fallback = bool(doctors)
 
     if not doctors:
-        logger.info("match: no candidates for '%s'", requested)
+        logger.info("match: no candidates within the service radius for '%s'", requested)
         return MatchResponse(
             status="no_match",
             analysis=analysis,
@@ -288,7 +317,6 @@ def match_from_analysis(
             message=NO_MATCH_MESSAGE,
         )
 
-    now = datetime.now()
     scored: list[tuple[int, float, float, MatchResult]] = []
     for doctor in doctors:
         distance_km = calculate_distance(latitude, longitude, doctor.latitude, doctor.longitude)

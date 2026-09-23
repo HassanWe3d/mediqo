@@ -163,6 +163,14 @@ _SPECIALTY_KEYWORDS: dict[str, dict[str, int]] = {
         "infant": 5, "toddler": 5, "newborn": 5, "my son": 4, "my daughter": 4,
         "vaccination": 5, "vaccine": 3, "growth": 2,
     },
+    "Gynecologist": {
+        "pregnant": 5, "pregnancy": 5, "period": 4, "periods": 4,
+        "menstrual": 5, "menstruation": 5, "pcod": 5, "pcos": 5,
+        "irregular periods": 5, "missed period": 5, "period pain": 5,
+        "menstrual cramps": 5, "white discharge": 4, "contraception": 4,
+        "infertility": 4, "conceiving": 4, "uterus": 4, "ovary": 4,
+        "ovarian": 4, "menopause": 4, "gynecologist": 5,
+    },
     "Neurologist": {
         "headache": 3, "migraine": 5, "migraines": 5, "numbness": 4,
         "tingling": 4, "tremor": 5, "tremors": 5, "seizure": 4,
@@ -370,6 +378,7 @@ Supported specialties (use exactly these strings):
 - Gastroenterologist
 - ENT Specialist
 - Pediatrician
+- Gynecologist
 - Neurologist
 - Ophthalmologist
 

@@ -42,8 +42,8 @@ def main() -> int:
     doctors = session.scalars(select(Doctor)).all()
     reviews = session.scalars(select(Review)).all()
 
-    # 1. Counts
-    expect(30 <= len(doctors) <= 50, "Doctor count within MVP range 30-50", f"got {len(doctors)}")
+    # 1. Counts (dataset expanded across India; keep a generous upper bound)
+    expect(100 <= len(doctors) <= 250, "Doctor count within expanded demo range 100-250", f"got {len(doctors)}")
     expect(len(reviews) >= 2 * len(doctors), "Reviews exist (>= 2 per doctor overall)",
            f"got {len(reviews)} for {len(doctors)} doctors")
 
@@ -121,12 +121,18 @@ def main() -> int:
            "Every weekday Mon-Sat has several doctors OFF (differentiated availability)",
            f"off counts: {off_counts}")
 
-    # 9. Geographic spread
+    # 9. Geographic spread: Lucknow remains the deepest market, with
+    # meaningful multi-region coverage so matching differs per city.
     cities = {doctor.city for doctor in doctors}
-    expect("Lucknow" in cities and len(cities) >= 3,
-           "Lucknow-focused coverage plus nearby cities", f"cities: {sorted(cities)}")
+    expect("Lucknow" in cities and len(cities) >= 10,
+           "Multi-city coverage with Lucknow as the deepest market", f"cities: {sorted(cities)}")
     lucknow = sum(1 for doctor in doctors if doctor.city == "Lucknow")
     expect(lucknow >= 30, "Lucknow has the bulk of doctors (>= 30)", f"got {lucknow}")
+    for metro in ("Delhi", "Mumbai", "Bengaluru"):
+        expect(metro in cities, f"Metro market present: {metro}")
+    kerala = {"Kochi", "Thiruvananthapuram", "Kozhikode"}
+    expect(kerala <= cities, "Kerala cities present (Kochi, Thiruvananthapuram, Kozhikode)",
+           f"missing: {sorted(kerala - cities)}")
 
     # 10. Idempotency — running the seed again must not duplicate anything
     before = (

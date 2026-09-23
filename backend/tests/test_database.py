@@ -264,8 +264,8 @@ def test_demo_dataset_present() -> None:
         doctors = connection.execute(text("SELECT COUNT(*) FROM doctors")).scalar_one()
         reviews = connection.execute(text("SELECT COUNT(*) FROM reviews")).scalar_one()
     expect(
-        30 <= doctors <= 50 and doctors * 2 <= reviews <= doctors * 5,
-        "Database holds the Step 3 demo dataset (30-50 doctors, 2-5 reviews each)",
+        100 <= doctors <= 250 and doctors * 2 <= reviews <= doctors * 5,
+        "Database holds the expanded demo dataset (100-250 doctors, 2-5 reviews each)",
         f"doctors={doctors}, reviews={reviews}",
     )
 

@@ -20,6 +20,7 @@ SUPPORTED_SPECIALIZATIONS: list[str] = [
     "Gastroenterologist",
     "ENT Specialist",
     "Pediatrician",
+    "Gynecologist",
     "Neurologist",
     "Ophthalmologist",
 ]
@@ -33,6 +34,7 @@ Specialization = Literal[
     "Gastroenterologist",
     "ENT Specialist",
     "Pediatrician",
+    "Gynecologist",
     "Neurologist",
     "Ophthalmologist",
 ]

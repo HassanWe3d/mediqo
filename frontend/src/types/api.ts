@@ -16,6 +16,7 @@ export const SUPPORTED_SPECIALIZATIONS = [
   "Gastroenterologist",
   "ENT Specialist",
   "Pediatrician",
+  "Gynecologist",
   "Neurologist",
   "Ophthalmologist",
 ] as const;

@@ -247,10 +247,12 @@ def main() -> int:
     # =====================================================================
     session = SessionLocal()
     try:
-        # Lowest-rated dentist: raising 4.0 -> 5.0 must add ~2.0 points
-        # ((100 - 80) x 10%) — visible above the integer rounding floor.
+        # Lowest-rated Lucknow dentist (the dataset is now multi-city; this
+        # case must rank the fixture doctor in the Lucknow candidate set):
+        # raising 4.0 -> 5.0 must add ~2.0 points ((100 - 80) x 10%).
         doctor = session.scalar(
-            select(Doctor).where(Doctor.specialization == "Dentist")
+            select(Doctor)
+            .where(Doctor.specialization == "Dentist", Doctor.city == "Lucknow")
             .order_by(Doctor.rating.asc())
             .limit(1)
         )
@@ -479,10 +481,9 @@ def main() -> int:
 
         expect(all(-90 <= d.latitude <= 90 and -180 <= d.longitude <= 180 for d in doctors),
                "INTEGRITY: all doctors have valid coordinates")
-        expect(all(d.specialization in
-                   {"General Physician", "Cardiologist", "Dermatologist", "Dentist",
-                    "Orthopedic", "Gastroenterologist", "ENT Specialist",
-                    "Pediatrician", "Neurologist", "Ophthalmologist"}
+        from app.schemas.matching import SUPPORTED_SPECIALIZATIONS
+
+        expect(all(d.specialization in SUPPORTED_SPECIALIZATIONS
                    for d in doctors),
                "INTEGRITY: all specializations are supported values")
         expect(all(d.languages for d in doctors), "INTEGRITY: all doctors have languages")
@@ -494,9 +495,11 @@ def main() -> int:
         doctor_ids = {d.id for d in doctors}
         expect(all(r.doctor_id in doctor_ids for r in reviews),
                "INTEGRITY: no orphan reviews")
-        expect(len(doctors) == 44 and len(reviews) == 154,
-               "INTEGRITY: dataset intact (44 doctors / 154 reviews)",
-               f"got {len(doctors)}/{len(reviews)}")
+        from app.seed import DOCTOR_ENTRIES
+
+        expect(len(doctors) == len(DOCTOR_ENTRIES),
+               "INTEGRITY: dataset intact (every dataset doctor present)",
+               f"got {len(doctors)}/{len(DOCTOR_ENTRIES)}")
     finally:
         session.close()
 

@@ -210,7 +210,8 @@ export function LocationPage() {
                 />
               </div>
               <p className="mt-2 text-xs text-faint">
-                Demo doctors are currently available in Lucknow and a few nearby cities.
+                Demo doctors are currently available in cities across India —
+                from Lucknow to Mumbai, Delhi and Kerala.
               </p>
               <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                 <Button type="submit" loading={manualChecking} className="sm:flex-1">

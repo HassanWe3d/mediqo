@@ -31,12 +31,25 @@ EARTH_RADIUS_KM = 6371.0
 
 # Approximate city-center coordinates for the cities present in the seeded
 # doctor database. Manual fallback resolves to these centers; there is no
-# external geocoding provider in the MVP (by design).
+# external geocoding provider in the MVP (by design). Keep this the single
+# source of truth for city centers — the demo seed uses the same values.
 CITY_CENTERS: dict[str, tuple[float, float]] = {
     "lucknow": (26.8467, 80.9462),
     "kanpur": (26.4499, 80.3329),
     "unnao": (26.5480, 80.3650),
     "sitapur": (27.1750, 80.6820),
+    "gorakhpur": (26.7606, 83.3732),
+    "delhi": (28.6139, 77.2090),
+    "jaipur": (26.9124, 75.7873),
+    "kolkata": (22.5726, 88.3639),
+    "mumbai": (19.0760, 72.8777),
+    "pune": (18.5204, 73.8567),
+    "bengaluru": (12.9716, 77.5946),
+    "hyderabad": (17.3850, 78.4867),
+    "chennai": (13.0827, 80.2707),
+    "kochi": (9.9312, 76.2673),
+    "thiruvananthapuram": (8.5241, 76.9366),
+    "kozhikode": (11.2588, 75.7804),
 }
 
 

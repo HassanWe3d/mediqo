@@ -24,7 +24,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from app.config import settings
 from app.database import SessionLocal, ensure_schema
 from app.routes import analyze, doctors, health, location, matching
-from app.seed import seed_demo_data
+from app.seed import seed_demo_data, top_up_demo_data
 
 logging.basicConfig(
     level=logging.DEBUG if settings.debug else logging.INFO,
@@ -39,14 +39,17 @@ def initialize_database() -> None:
     Fresh production databases (e.g. a newly provisioned Render PostgreSQL)
     contain no tables; without this, every endpoint fails with
     `relation "doctors" does not exist`. `create_all` only creates missing
-    tables (never alters or drops), and `seed_demo_data` exits early when
-    demo data is already present, so restarting is always safe and no
-    existing data is ever removed.
+    tables (never alters or drops), and the seed paths never delete data:
+    `seed_demo_data` fills an empty database once, and `top_up_demo_data`
+    adds any dataset doctors missing from an older demo dataset (by
+    (name, city) — existing rows are never modified or removed).
     """
     ensure_schema()
     session = SessionLocal()
     try:
         seeded = seed_demo_data(session)
+        if seeded is None:
+            seeded = top_up_demo_data(session)
     finally:
         session.close()
     if seeded:
@@ -56,7 +59,7 @@ def initialize_database() -> None:
             seeded["reviews"],
         )
     else:
-        logger.info("Demo data already present — seed skipped.")
+        logger.info("Demo dataset already complete — seed skipped.")
 
 
 @asynccontextmanager
