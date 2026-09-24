@@ -11,6 +11,7 @@
     "qa:problem": "node tests/problem-qa.mjs",
     "qa:results": "node tests/results-qa.mjs",
     "qa:doctor": "node tests/doctor-profile-qa.mjs",
+    "qa:booking": "node tests/booking-share-qa.mjs",
     "qa:e2e": "node tests/e2e-final-qa.mjs",
     "qa:design": "node tests/design-qa.mjs",
     "qa:prod": "node tests/prod-smoke.mjs",

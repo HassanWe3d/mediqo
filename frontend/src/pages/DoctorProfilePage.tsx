@@ -9,6 +9,9 @@ import { Badge } from "../components/ui/Badge";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
 import { ErrorState } from "../components/ui/ErrorState";
+import { BookingModal } from "../components/doctor/BookingModal";
+import { ShareMenu } from "../components/doctor/ShareMenu";
+import { getDemoBookingForDoctor } from "../utils/bookingSlots";
 
 type DoctorPhase = "loading" | "success" | "not_found" | "error";
 type ReviewsPhase = "idle" | "loading" | "success" | "error";
@@ -92,6 +95,9 @@ export function DoctorProfilePage() {
   const [attempt, setAttempt] = useState(0);
   const inflightRef = useRef(false);
 
+  const [bookingOpen, setBookingOpen] = useState(false);
+  const [existingBooking, setExistingBooking] = useState<string | null>(null);
+
   const [reviewsPhase, setReviewsPhase] = useState<ReviewsPhase>("idle");
   const [reviews, setReviews] = useState<DoctorReviewsResponse | null>(null);
   const [reviewsAttempt, setReviewsAttempt] = useState(0);
@@ -147,6 +153,13 @@ export function DoctorProfilePage() {
   }, [phase, doctorId, hasValidId, reviewsAttempt]);
 
   const retryReviews = useCallback(() => setReviewsAttempt((a) => a + 1), []);
+
+  /* Demo booking persistence: reflect any locally stored booking for this
+     doctor (localStorage only — read once on success, and after a new one). */
+  useEffect(() => {
+    if (phase !== "success") return;
+    setExistingBooking(getDemoBookingForDoctor(doctorId)?.ref ?? null);
+  }, [phase, doctorId]);
 
   /* The real "why recommended" from the flow's matching response — never
      regenerated or invented here; absent on direct visits, which is fine. */
@@ -218,6 +231,7 @@ export function DoctorProfilePage() {
 
       {/* ---- Profile header ---- */}
       <Card as="article" className="mt-6 p-6 sm:p-8">
+        <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
           {doctor.profile_image ? (
             <img
@@ -257,6 +271,22 @@ export function DoctorProfilePage() {
               {doctor.clinic_name} · {doctor.city}
             </p>
           </div>
+        </div>
+
+        {/* ---- Demo actions: booking + share ---- */}
+        <div className="flex flex-col gap-3 border-t border-line pt-5 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-faint">
+            {existingBooking
+              ? `Your demo booking for this doctor: ${existingBooking} (stored in this browser).`
+            : "Booking is a demo — no real appointment is made."}
+          </p>
+          <div className="flex flex-wrap items-center gap-3">
+            <ShareMenu doctorId={doctor.id} doctorName={doctor.name} />
+            <Button size="md" onClick={() => setBookingOpen(true)}>
+              Book Appointment
+            </Button>
+          </div>
+        </div>
         </div>
       </Card>
 
@@ -428,6 +458,22 @@ export function DoctorProfilePage() {
           />
         )}
       </section>
+
+      {bookingOpen && doctor && (
+        <BookingModal
+          doctor={{
+            id: doctor.id,
+            name: doctor.name,
+            specialization: doctor.specialization,
+            clinic_name: doctor.clinic_name,
+            city: doctor.city,
+            consultation_fee: doctor.consultation_fee,
+          }}
+          availability={doctor.availability}
+          onClose={() => setBookingOpen(false)}
+          onBooked={(booking) => setExistingBooking(booking.ref)}
+        />
+      )}
     </PageContainer>
   );
 }

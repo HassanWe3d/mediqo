@@ -89,3 +89,13 @@ export function feeDisplay(fee: number): string {
   return `₹${fee.toLocaleString("en-IN")}`;
 }
 
+/** "14:30" → "2:30 PM" (demo booking slot labels; falls back to the input). */
+export function to12hLabel(time: string): string {
+  const [hStr, mStr] = time.split(":");
+  const h = Number.parseInt(hStr, 10);
+  if (!Number.isFinite(h)) return time;
+  const suffix = h >= 12 ? "PM" : "AM";
+  const h12 = h % 12 === 0 ? 12 : h % 12;
+  return mStr === "00" ? `${h12} ${suffix}` : `${h12}:${mStr} ${suffix}`;
+}
+
