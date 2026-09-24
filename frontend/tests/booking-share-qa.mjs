@@ -243,10 +243,12 @@ console.log("\n== A3 · SLOT DERIVATION (from published availability) ==");
     return h * 60 + Number(m[2] ?? 0);
   };
   report(allSlots.every((s) => Number.isFinite(toMinutes(s))), "Slots labelled as 12h times", allSlots.slice(0, 3).join(", "));
-  // 30-minute increments within the first day's grid
-  const first = slots[0].slots.map(toMinutes);
+  // 30-minute increments on the first day that has ≥2 slots (today may
+  // legitimately have only one remaining slot late in the day).
+  const gridDay = slots.find((s) => s.slots.length >= 2) ?? slots[0];
+  const first = gridDay.slots.map(toMinutes);
   const spaced = first.every((v, i) => i === 0 || v - first[i - 1] === 30);
-  report(spaced && first.length >= 2, "Slots are 30-minute increments", slots[0].slots.slice(0, 3).join(", "));
+  report(spaced && first.length >= 2, "Slots are 30-minute increments", gridDay.slots.slice(0, 3).join(", "));
   // The published 10:00 window start must appear on at least one later day
   // (today's earlier slots are correctly filtered out).
   report(allSlots.includes("10 AM"), "Slots cover the published window start (10 AM)");
