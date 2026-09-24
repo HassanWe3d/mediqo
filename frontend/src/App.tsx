@@ -6,6 +6,7 @@ import { LocationPage } from "./pages/LocationPage";
 import { ProblemPage } from "./pages/ProblemPage";
 import { ResultsPage } from "./pages/ResultsPage";
 import { DoctorProfilePage } from "./pages/DoctorProfilePage";
+import { ManageAppointmentPage } from "./pages/ManageAppointmentPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/problem" element={<ProblemPage />} />
           <Route path="/results" element={<ResultsPage />} />
           <Route path="/doctor/:id" element={<DoctorProfilePage />} />
+          <Route path="/appointments/manage" element={<ManageAppointmentPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

@@ -2,6 +2,7 @@ import { Hero } from "../components/landing/Hero";
 import { FlowSteps } from "../components/landing/FlowSteps";
 import { Differentiator } from "../components/landing/Differentiator";
 import { FinalCta } from "../components/landing/FinalCta";
+import { ManageAppointment } from "../components/landing/ManageAppointment";
 import { useScrollToHash } from "../hooks/useScrollToHash";
 
 /**
@@ -16,6 +17,7 @@ export function LandingPage() {
       <Hero />
       <FlowSteps />
       <Differentiator />
+      <ManageAppointment />
       <FinalCta />
     </>
   );

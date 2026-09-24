@@ -98,8 +98,10 @@ function formatDayLabel(d: Date): string {
  * Persistence (localStorage only — demo scope, never sent to any server)
  * ------------------------------------------------------------------------- */
 
+export type DemoBookingStatus = "confirmed" | "rescheduled" | "cancelled";
+
 export interface DemoBooking {
-  /** Deterministic demo reference (MQ-XXXXXX). */
+  /** Deterministic demo reference (MQ-XXXXXX) — never changes after booking. */
   ref: string;
   doctorId: number;
   doctorName: string;
@@ -115,17 +117,26 @@ export interface DemoBooking {
   patientName: string;
   contact: string;
   createdAt: string;
+  /** Demo lifecycle status. Records written before statuses existed read as
+   *  "confirmed" — nothing is ever deleted. */
+  status: DemoBookingStatus;
 }
 
 const STORAGE_KEY = "mediqo.demoBookings";
 
-/** Read all demo bookings; unavailable/blocked storage degrades to empty. */
+/** Read all demo bookings; unavailable/blocked storage degrades to empty.
+ *  Older records without a status are upgraded to "confirmed" in memory. */
 export function loadDemoBookings(): Record<string, DemoBooking> {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return {};
     const parsed: unknown = JSON.parse(raw);
-    return parsed && typeof parsed === "object" ? (parsed as Record<string, DemoBooking>) : {};
+    if (!parsed || typeof parsed !== "object") return {};
+    const record = parsed as Record<string, DemoBooking>;
+    for (const booking of Object.values(record)) {
+      booking.status ??= "confirmed";
+    }
+    return record;
   } catch {
     return {};
   }
@@ -158,6 +169,57 @@ export function getDemoBookingForDoctor(doctorId: number): DemoBooking | null {
       (latest, booking) => (latest === null || booking.createdAt > latest.createdAt ? booking : latest),
       null,
     );
+}
+
+/** Apply a partial update to one stored booking; returns the updated record. */
+export function updateDemoBooking(ref: string, patch: Partial<Omit<DemoBooking, "ref">>): DemoBooking | null {
+  try {
+    const all = loadDemoBookings();
+    const existing = all[ref];
+    if (!existing) return null;
+    const updated: DemoBooking = { ...existing, ...patch, ref };
+    all[ref] = updated;
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+    return updated;
+  } catch {
+    return null;
+  }
+}
+
+/** Reschedule in place: new date/time, status "rescheduled", SAME ref. */
+export function rescheduleDemoBooking(
+  ref: string,
+  date: string,
+  start: string,
+  end: string,
+): DemoBooking | null {
+  return updateDemoBooking(ref, { date, start, end, status: "rescheduled" });
+}
+
+/** Cancel in place: status "cancelled", every other field preserved. */
+export function cancelDemoBooking(ref: string): DemoBooking | null {
+  return updateDemoBooking(ref, { status: "cancelled" });
+}
+
+/**
+ * Normalize a user-typed Appointment ID for lookup: trim, uppercase, drop
+ * every non-alphanumeric character. "mq-a86rrl", "MQ A86RRL" and
+ * "mq.a86rrl" all resolve to the same stored reference — the ID itself is
+ * never regenerated or reinterpreted.
+ */
+export function normalizeRefInput(raw: string): string {
+  return raw.toUpperCase().replace(/[^A-Z0-9]/g, "");
+}
+
+/** Find a demo appointment by (tolerantly normalized) Appointment ID. */
+export function findDemoBooking(rawQuery: string): DemoBooking | null {
+  const query = normalizeRefInput(rawQuery);
+  if (query.length === 0) return null;
+  const all = loadDemoBookings();
+  for (const [ref, booking] of Object.entries(all)) {
+    if (normalizeRefInput(ref) === query) return booking;
+  }
+  return null;
 }
 
 /**

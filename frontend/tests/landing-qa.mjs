@@ -79,7 +79,7 @@ const f = await page.evaluate(() => ({
     document.body.textContent.includes("stomach pain"),
 }));
 report(f.wordmark === "MEDIQO.", "Wordmark renders", f.wordmark);
-report(f.navLinks.length === 2, "Nav renders 2 anchor links", f.navLinks.join(", "));
+report(f.navLinks.length === 3, "Nav renders 3 links (2 anchors + Manage appointment)", f.navLinks.join(", "));
 report(f.headerCta && f.heroCta && f.finalCta, "All 3 Find-a-Doctor CTAs present");
 report(f.h1.includes("right doctor") && f.h1.includes("wherever you are"), "Headline correct", f.h1);
 report(f.supporting, "Supporting copy renders");

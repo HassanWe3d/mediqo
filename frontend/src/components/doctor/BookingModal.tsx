@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { Badge } from "../ui/Badge";
 import { Button } from "../ui/Button";
 import { Card } from "../ui/Card";
@@ -42,6 +43,7 @@ export function BookingModal({ doctor, availability, onClose, onBooked }: Bookin
   const [contact, setContact] = useState("");
   const [touched, setTouched] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [refCopied, setRefCopied] = useState(false);
   const [booking, setBooking] = useState<DemoBooking | null>(null);
 
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -109,11 +111,23 @@ export function BookingModal({ doctor, availability, onClose, onBooked }: Bookin
       patientName: patientName.trim(),
       contact: contact.trim(),
       createdAt: new Date().toISOString(),
+      status: "confirmed",
     };
     saveDemoBooking(record);
     setBooking(record);
     setStep("confirmation");
     onBooked(record);
+  };
+
+  const copyRef = async () => {
+    if (!booking) return;
+    try {
+      await navigator.clipboard.writeText(booking.ref);
+      setRefCopied(true);
+      window.setTimeout(() => setRefCopied(false), 2000);
+    } catch {
+      /* clipboard unavailable — the ID stays visible on screen */
+    }
   };
 
   const copyDetails = async () => {
@@ -308,6 +322,9 @@ export function BookingModal({ doctor, availability, onClose, onBooked }: Bookin
             </p>
 
             <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
+              <Button variant="secondary" size="md" onClick={copyRef}>
+                {refCopied ? "Appointment ID copied ✓" : "Copy Appointment ID"}
+              </Button>
               <Button variant="secondary" size="md" onClick={copyDetails}>
                 {copied ? "Copied ✓" : "Copy details"}
               </Button>
@@ -315,6 +332,13 @@ export function BookingModal({ doctor, availability, onClose, onBooked }: Bookin
                 Done
               </Button>
             </div>
+            <p className="text-center text-xs text-muted">
+              Keep the Appointment ID to manage this appointment later from the{" "}
+              <Link to="/appointments/manage" onClick={onClose} className="font-medium text-accent underline-offset-2 hover:underline">
+                Manage Appointment
+              </Link>{" "}
+              page.
+            </p>
           </div>
         )}
       </div>

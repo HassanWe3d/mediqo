@@ -19,6 +19,9 @@ export function AppHeader() {
           <Link to="/#why-mediqo" className="inline-flex items-center py-2 transition-colors hover:text-ink">
             About
           </Link>
+          <Link to="/appointments/manage" className="inline-flex items-center py-2 transition-colors hover:text-ink">
+            Manage appointment
+          </Link>
         </nav>
         <div className="flex items-center gap-3">
           <Badge variant="demo" className="hidden md:inline-flex">

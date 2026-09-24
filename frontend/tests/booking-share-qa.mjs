@@ -476,6 +476,144 @@ console.log("\n== B1 · LIVE PROFILE + DEEP LINK ==");
   }
 }
 
+console.log("\n== B1b · MANAGE APPOINTMENT (live: book → lookup → reschedule → cancel) ==");
+{
+  const liveManage = await fetch("http://127.0.0.1:8000/doctors?page=1&page_size=1").then((r) => r.json());
+  // A fresh live booking to manage.
+  await page.evaluate(() => localStorage.removeItem("mediqo.demoBookings"));
+  await setCfg(page, { mockEnabled: false, resetStorage: true });
+  await gotoDoctor(page, liveManage.items[0].id);
+  await clickButton(page, "Book Appointment");
+  await sleep(300);
+  const slotPicked = await page.evaluate(() => {
+    const btn = document.querySelector('section[aria-label="Select a time"] button');
+    btn?.click();
+    return !!btn;
+  });
+  report(slotPicked, "Manage flow: live slot selectable");
+  if (slotPicked) {
+    await typeInto(page, 'input[placeholder="e.g. Aarav Gupta"]', "Manage Tester");
+    await clickButton(page, "Confirm Appointment");
+    await page.waitForFunction(() => document.body.textContent.includes("Appointment Booked"), { timeout: 4000 });
+    const ref = (await bodyText()).match(/Demo reference: (MQ-[A-Z0-9]{6})/)?.[1];
+    report(!!ref, "Manage flow: booking has an Appointment ID", ref);
+
+    // Copy Appointment ID button on the confirmation screen
+    await page.evaluate(() => {
+      navigator.clipboard.writeText = async (text) => {
+        window.__clipRef = text;
+      };
+    });
+    await clickButton(page, "Copy Appointment ID");
+    await sleep(200);
+    const copiedRef = await page.evaluate(() => window.__clipRef);
+    report(copiedRef === ref, "Copy Appointment ID copies the exact ID", copiedRef);
+    report((await bodyText()).includes("Appointment ID copied"), "Copy ID success state shows");
+    await clickButton(page, "Done");
+    await sleep(200);
+    // Keep the booking: subsequent navigations must not clear storage.
+    await setCfg(page, { mockEnabled: false, resetStorage: false });
+
+    // Landing page hosts the compact manage section
+    await page.goto(`${BASE}/`, { waitUntil: "networkidle0" });
+    await sleep(500);
+    report((await bodyText()).includes("Manage your appointment"), "Landing shows Manage your appointment section");
+    report(await page.evaluate(() => !!document.querySelector('input[placeholder="MQ-XXXXXX"]')), "Landing has Appointment ID field");
+
+    // Header entry point
+    report(await page.evaluate(() => [...document.querySelectorAll("header a")].some((a) => a.getAttribute("href") === "/appointments/manage")), "Header links to /appointments/manage");
+
+    // TEST 2 — lookup via the landing section (typed ID, mixed case + spaces)
+    await typeInto(page, 'input[placeholder="MQ-XXXXXX"]', ref.toLowerCase().slice(0, 2) + " " + ref.slice(2));
+    await clickButton(page, "View Appointment");
+    await page.waitForFunction(() => document.body.textContent.includes("Appointment Details"), { timeout: 4000 });
+    let t = await bodyText();
+    report(t.includes(ref), "Dashboard shows the Appointment ID", ref);
+    report(t.includes("Manage Tester"), "Dashboard shows the patient name");
+    report(t.includes(liveManage.items[0].name), "Dashboard shows the doctor");
+    report(t.includes("Confirmed"), "Status shows Confirmed after booking");
+    report(await page.evaluate(() => location.pathname === "/appointments/manage"), "Manage route active");
+
+    // TEST 3 — reschedule
+    await clickButton(page, "Reschedule Appointment");
+    await sleep(500);
+    report((await bodyText()).includes("Current:"), "Reschedule shows current date/time");
+    const pickedSlot = await page.evaluate(() => {
+      const dayButtons = [...document.querySelectorAll('section[aria-label="Reschedule: pick a new date"] button')];
+      const target = dayButtons.length > 1 ? dayButtons[1] : dayButtons[0];
+      target.click();
+      return true;
+    });
+    await sleep(200);
+    report(pickedSlot, "Reschedule: new date picked");
+    const timePicked = await page.evaluate(() => {
+      const btn = document.querySelector('section[aria-label="Reschedule: pick a new time"] button');
+      btn?.click();
+      return !!btn;
+    });
+    report(timePicked, "Reschedule: new time picked");
+    const before = await page.evaluate((r) => JSON.parse(localStorage.getItem("mediqo.demoBookings") ?? "{}")[r], ref);
+    await clickButton(page, "Confirm Reschedule");
+    await page.waitForFunction(() => document.body.textContent.includes("Rescheduled"), { timeout: 4000 });
+    t = await bodyText();
+    report(t.includes("Rescheduled"), "Status shows Rescheduled");
+    report(t.includes(ref), "SAME Appointment ID after reschedule", ref);
+    const after = await page.evaluate((r) => JSON.parse(localStorage.getItem("mediqo.demoBookings") ?? "{}")[r], ref);
+    report(after.date !== before.date || after.start !== before.start, "Date/time actually changed", `${before.date} ${before.start} → ${after.date} ${after.start}`);
+    report(after.status === "rescheduled", "Stored status is rescheduled", after.status);
+
+    // persistence across refresh
+    await page.reload({ waitUntil: "networkidle0" });
+    await sleep(650);
+    t = await bodyText();
+    report(t.includes("Rescheduled") && t.includes(ref), "Reschedule persists after refresh", ref);
+
+    // TEST 4 — cancel (with confirmation dialog)
+    await clickButton(page, "Cancel Appointment");
+    await sleep(250);
+    t = await bodyText();
+    report(t.includes("Are you sure you want to cancel this appointment?"), "Cancel confirmation dialog shows");
+    report(t.includes("Keep Appointment"), "Keep Appointment option offered");
+    await clickButton(page, "Keep Appointment");
+    await sleep(200);
+    report((await bodyText()).includes("Rescheduled"), "Keep Appointment returns without cancelling");
+    await clickButton(page, "Cancel Appointment");
+    await sleep(250);
+    await clickButton(page, "Yes, cancel it");
+    await page.waitForFunction(() => document.body.textContent.includes("Cancelled"), { timeout: 4000 });
+    t = await bodyText();
+    report(t.includes("Cancelled"), "Status shows Cancelled");
+    report(t.includes(ref), "SAME Appointment ID after cancel", ref);
+    const cancelled = await page.evaluate((r) => JSON.parse(localStorage.getItem("mediqo.demoBookings") ?? "{}")[r], ref);
+    report(cancelled.status === "cancelled", "Stored status is cancelled", cancelled.status);
+    report(cancelled.patientName === "Manage Tester", "Cancelled record keeps details");
+    report((await bodyText()).includes("This appointment is cancelled"), "Cancelled guidance shows");
+    await page.reload({ waitUntil: "networkidle0" });
+    await sleep(650);
+    t = await bodyText();
+    report(t.includes("Cancelled") && t.includes(ref), "Cancellation persists after refresh", ref);
+
+    // TEST 5 — invalid ID (dashboard route + landing lookup)
+    await page.goto(`${BASE}/appointments/manage`, { waitUntil: "networkidle0" });
+    await sleep(400);
+    await typeInto(page, 'input[placeholder="MQ-XXXXXX"]', "MED-INVALID-123");
+    await clickButton(page, "View Appointment");
+    await sleep(300);
+    report(
+      (await bodyText()).includes("Appointment not found. Please check your Appointment ID."),
+      "Invalid ID shows the friendly error",
+    );
+    report(!(await bodyText()).includes("Appointment Details"), "Invalid ID does not open a dashboard");
+    // mixed-format lookup of a real ID still works (normalization)
+    await typeInto(page, 'input[placeholder="MQ-XXXXXX"]', ref.toLowerCase());
+    await clickButton(page, "View Appointment");
+    await page.waitForFunction(() => document.body.textContent.includes("Appointment Details"), { timeout: 4000 });
+    report((await bodyText()).includes(ref), "Lowercase/padded ID still resolves to the appointment");
+  } else {
+    report(true, "Live doctor fully booked today (manage-flow legs skipped)");
+  }
+}
+
 console.log("\n== B2 · MATCHING UNTOUCHED (live AI spot-checks) ==");
 {
   const check = async (problem, expected) => {

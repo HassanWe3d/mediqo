@@ -473,7 +473,7 @@ report(serious.length === 0, "axe (manual panel): no serious violations", seriou
 await page4.goto(BASE + "/location", { waitUntil: "networkidle0" });
 await sleep(600);
 const stops = [];
-for (let i = 0; i < 8; i++) {
+for (let i = 0; i < 10; i++) {
   await page4.keyboard.press("Tab");
   const s = await page4.evaluate(() => {
     const el = document.activeElement;
